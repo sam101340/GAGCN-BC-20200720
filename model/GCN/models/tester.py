@@ -55,50 +55,7 @@ def model_inference(sess, pred, inputs, batch_size, n_his, n_pred, step_idx, min
     return min_va_val, min_val
 
 
-# def model_test(inputs, batch_size, n_his, n_pred, inf_mode, load_path='./output/models/'):
-#     '''
-#     Load and test saved model from the checkpoint.
-#     :param inputs: instance of class Dataset, data source for test.
-#     :param batch_size: int, the size of batch.
-#     :param n_his: int, the length of historical records for training.
-#     :param n_pred: int, the length of prediction.
-#     :param inf_mode: str, test mode - 'merge / multi-step test' or 'separate / single-step test'.
-#     :param load_path: str, the path of loaded model.
-#     '''
-#     start_time = time.time()
-#     model_path = tf.train.get_checkpoint_state(load_path).model_checkpoint_path
-#
-#     test_graph = tf.Graph()
-#
-#     with test_graph.as_default():
-#         saver = tf.train.import_meta_graph(pjoin(f'{model_path}.meta'))
-#         #adj_bias_t = tf.placeholder(dtype=tf.float32, shape=[None, 228, 228], name='adj_bias_t')
-#     with tf.Session(graph=test_graph) as test_sess:
-#         saver.restore(test_sess, tf.train.latest_checkpoint(load_path))
-#         print(f'>> Loading saved model from {model_path} ...')
-#
-#         pred = test_graph.get_collection('y_pred')
-#
-#         if inf_mode == 'sep':
-#             # for inference mode 'sep', the type of step index is int.
-#             step_idx = n_pred - 1
-#             tmp_idx = [step_idx]
-#         elif inf_mode == 'merge':
-#             # for inference mode 'merge', the type of step index is np.ndarray.
-#             step_idx = tmp_idx = np.arange(3, n_pred + 1, 3) - 1
-#         else:
-#             raise ValueError(f'ERROR: test mode "{inf_mode}" is not defined.')
-#
-#         x_test, x_stats = inputs.get_data('test'), inputs.get_stats()
-#
-#         y_test, len_test = multi_pred(test_sess, pred, x_test, batch_size, n_his, n_pred, step_idx)
-#         evl = evaluation(x_test[0:len_test, step_idx + n_his, :, :], y_test, x_stats)
-#
-#         for ix in tmp_idx:
-#             te = evl[ix - 2:ix + 1]
-#             print(f'Time Step {ix + 1}: MAPE {te[0]:7.3%}; MAE  {te[1]:4.3f}; RMSE {te[2]:6.3f}.')
-#         print(f'Model Test Time {time.time() - start_time:.3f}s')
-#     print('Testing model finished!')
+
 
 
 def model_test(inputs,batch_size, n_his, n_pred, inf_mode, load_path='./output/models/'):
