@@ -17,7 +17,7 @@ os.environ['CUDA_VISIBLE_DEVICES'] = "0"
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--traffic_data_path', default=r'F:\GAGCN\project\data_loader\dataset.npz')
+parser.add_argument('--traffic_data_path', default=r'data\dataset.npz')
 parser.add_argument('--n_route', type=int, default=50)
 parser.add_argument('--n_his', type=int, default=12)
 parser.add_argument('--n_pred', type=int, default=12)
